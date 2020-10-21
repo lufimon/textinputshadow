@@ -17,6 +17,9 @@ class TextInputShadow @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
+
+    private lateinit var edt: AppCompatEditText
+
     init {
         init(context, attrs, defStyle)
     }
@@ -82,7 +85,7 @@ class TextInputShadow @JvmOverloads constructor(
         }
         View.inflate(context, R.layout.text_input_shadow, this)
         val card = findViewById<MaterialCardView>(R.id.card_input_shadow)
-        val edt = findViewById<AppCompatEditText>(R.id.text_input_shadow)
+        edt = findViewById(R.id.text_input_shadow)
         val img = findViewById<AppCompatImageView>(R.id.img_input_shadow)
         if (drawable != View.NO_ID) {
             img.setImageResource(drawable)
@@ -104,7 +107,7 @@ class TextInputShadow @JvmOverloads constructor(
         edt.nextFocusRightId = nextFocusRightId
         edt.nextFocusUpId = nextFocusUpId
         edt.setOnFocusChangeListener { _, hasFocus ->
-            if(hasFocus){
+            if (hasFocus) {
                 card.cardElevation = 6f.toDip()
             } else {
                 card.cardElevation = 0f.toDip()
@@ -112,10 +115,22 @@ class TextInputShadow @JvmOverloads constructor(
         }
     }
 
+    var text: String?
+        get() {
+            return edt.text.toString()
+        }
+        set(value) {
+            edt.setText(value)
+        }
+
     private fun EditText?.setMaxLength(length: Int) {
         val filterArray = arrayOf(InputFilter.LengthFilter(length))
         this?.filters = filterArray
     }
 
-    private fun Float?.toDip() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this ?: -1f, resources.displayMetrics)
+    private fun Float?.toDip() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this ?: -1f,
+        resources.displayMetrics
+    )
 }
