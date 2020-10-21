@@ -1,16 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
-        android:id="@id/text_input_shadow"
+    <FrameLayout
+        android:id="@id/frame_input_shadow"
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:background="@drawable/text_input_shadow_background"
-        android:fontFamily="@font/kanit_regular"
-        android:includeFontPadding="false"
-        android:paddingStart="40dp"
-        android:textColor="@color/cobalt"
-        android:textColorHint="@color/powderBlue"
-        android:textSize="15sp"
-        android:theme="@style/Theme.MaterialComponents" />
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MaterialComponents">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@id/card_input_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp"
+            app:cardElevation="0dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginBottom="11dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@id/text_input_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="28dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/text_input_shadow_background"
+                android:fontFamily="@font/kanit_regular"
+                android:includeFontPadding="false"
+                android:paddingStart="40dp"
+                android:textColor="@color/cobalt"
+                android:textColorHint="@color/powderBlue"
+                android:textSize="15sp" />
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@id/img_input_shadow"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </merge>

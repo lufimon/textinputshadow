@@ -11,5 +11,6 @@
         <attr name="android:nextFocusUp"/>
         <attr name="android:text"/>
         <attr name="android:maxLength"/>
+        <attr name="android:drawable"/>
     </declare-styleable>
 </resources>

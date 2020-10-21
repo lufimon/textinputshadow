@@ -5,18 +5,18 @@ import android.text.InputFilter
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.MotionEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.FrameLayout
-import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatImageView
 import com.google.android.material.card.MaterialCardView
 
 class TextInputShadow @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyle: Int = 0
-) : MaterialCardView(context, attrs, defStyle) {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyle: Int = 0
+) : FrameLayout(context, attrs, defStyle) {
     init {
         init(context, attrs, defStyle)
     }
@@ -32,6 +32,7 @@ class TextInputShadow @JvmOverloads constructor(
         val nextFocusRightId: Int
         val nextFocusUpId: Int
         val maxLength: Int
+        val drawable: Int
         if (attrs == null) {
             text = null
             hint = null
@@ -43,6 +44,7 @@ class TextInputShadow @JvmOverloads constructor(
             nextFocusRightId = View.NO_ID
             nextFocusUpId = View.NO_ID
             maxLength = View.NO_ID
+            drawable = View.NO_ID
         } else {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TextInputShadow)
             text = typedArray.getText(R.styleable.TextInputShadow_android_text)
@@ -65,18 +67,26 @@ class TextInputShadow @JvmOverloads constructor(
                     View.NO_ID
             )
             nextFocusRightId = typedArray.getResourceId(
-                    R.styleable.TextInputShadow_android_nextFocusRight,
-                    View.NO_ID
+                R.styleable.TextInputShadow_android_nextFocusRight,
+                View.NO_ID
             )
             nextFocusUpId =
-                    typedArray.getResourceId(R.styleable.TextInputShadow_android_nextFocusUp, View.NO_ID)
+                typedArray.getResourceId(
+                    R.styleable.TextInputShadow_android_nextFocusUp,
+                    View.NO_ID
+                )
             maxLength = typedArray.getInt(R.styleable.TextInputShadow_android_maxLength, -1)
+            drawable =
+                typedArray.getResourceId(R.styleable.TextInputShadow_android_drawable, View.NO_ID)
             typedArray.recycle()
         }
         View.inflate(context, R.layout.text_input_shadow, this)
-        this.cardElevation = 0f.toDip()
-        this.radius = 25f.toDip()
-        val edt = findViewById<EditText>(R.id.text_input_shadow)
+        val card = findViewById<MaterialCardView>(R.id.card_input_shadow)
+        val edt = findViewById<AppCompatEditText>(R.id.text_input_shadow)
+        val img = findViewById<AppCompatImageView>(R.id.img_input_shadow)
+        if (drawable != View.NO_ID) {
+            img.setImageResource(drawable)
+        }
         edt.hint = hint
         edt.setText(text)
         if (maxLength != View.NO_ID) {
@@ -95,9 +105,9 @@ class TextInputShadow @JvmOverloads constructor(
         edt.nextFocusUpId = nextFocusUpId
         edt.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus){
-                this.cardElevation = 6f.toDip()
+                card.cardElevation = 6f.toDip()
             } else {
-                this.cardElevation = 0f.toDip()
+                card.cardElevation = 0f.toDip()
             }
         }
     }

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <item type="id" name="text_input_shadow" />
+    <item name="text_input_shadow" type="id" />
+    <item name="img_input_shadow" type="id" />
+    <item name="card_input_shadow" type="id"/>
+    <item name="frame_input_shadow" type="id" />
 </resources>
