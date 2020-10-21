@@ -33,6 +33,7 @@
                 android:includeFontPadding="false"
                 android:paddingStart="40dp"
                 android:textColor="@color/cobalt"
+                android:textCursorDrawable="@drawable/color_cursor"
                 android:textColorHint="@color/powderBlue"
                 android:textSize="15sp" />
         </com.google.android.material.card.MaterialCardView>
