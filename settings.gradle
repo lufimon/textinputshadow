@@ -1,0 +1,3 @@
+include ':textinputshadowlib'
+include ':app'
+rootProject.name = "textinputshadow"
